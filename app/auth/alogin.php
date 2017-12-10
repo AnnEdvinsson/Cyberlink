@@ -16,7 +16,6 @@ if (isset($_POST['email'], $_POST['password'])) {
     if(empty($email)) {
         $errors[] ='The email field is empty';
     }
-
     //filter_var function to validate the input data. If the
     // function returns false the value of $_POST['email'] isn't
     // a valid email address.
