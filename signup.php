@@ -3,7 +3,21 @@
 <article>
     <h1>Sign up</h1>
 
-    <form action="app/auth/asignup.php" method="post">
+<!-- If the errors array contains any errors, error message will display to the user.
+If not, a welcome message will show.  -->
+    <?php if (isset($errors)): ?>
+               <?php if (count($errors) > 0): ?>
+                   <ol>
+                       <?php foreach ($errors as $error): ?>
+                           <li><?php echo $error; ?></li>
+                       <?php endforeach; ?>
+                   </ol>
+               <?php else: ?>
+                   <p><?php echo 'Welcome to Cyberlink'; ?></p>
+               <?php endif; ?>
+           <?php endif; ?>
+
+    <form action="app/auth/asignup.php" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="firstName">First name</label>
             <input class="form-control" type="text" name="firstName" placeholder="First name" required>
@@ -17,7 +31,7 @@
         </div><!-- /form-group -->
 
         <div class="form-group">
-            <label for="lastName">Username</label>
+            <label for="userName">Username</label>
             <input class="form-control" type="text" name="userName" placeholder="Username" required>
             <small class="form-text text-muted">Please provide your username.</small>
         </div><!-- /form-group -->
@@ -30,19 +44,19 @@
 
         <div class="form-group">
             <label for="password">Password</label>
-            <input class="form-control" type="password" name="Password" required>
+            <input class="form-control" type="password" name="password" required>
             <small class="form-text text-muted">Please provide your password.</small>
         </div><!-- /form-group -->
 
         <div class="form-group">
-            <label for="biography">Biography</label>
-            <input class="form-control" type="text" name="biography">
+            <label for="bio">Biography</label>
+            <input class="form-control" type="text" name="bio">
             <small class="form-text text-muted">Please tell us something about who you are.</small>
         </div><!-- /form-group -->
 
         <div class="form-group">
             <label for="avatar">Choose an image to upload</label>
-            <input class="form-control" type="file" name="avatar">
+            <input class="form-control" type="file" name="avatar" accept = ".png, .jpg, .jpeg">
             <button type="submit" class="btn btn-primary">Upload</button>
         </div><!-- /form-group -->
 
