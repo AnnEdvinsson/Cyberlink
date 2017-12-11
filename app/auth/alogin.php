@@ -25,7 +25,7 @@ if (isset($_POST['email'], $_POST['password'])) {
     $password = filter_var($_POST['password']);
 
     // Prepare, bind email parameter and execute the database query.
-    $checkUser = $pdo->prepare("SELECT email FROM users WHERE email=:email");
+    $checkUser = $pdo->prepare("SELECT * FROM users WHERE email=:email");
     $checkUser ->bindParam(':email', $email, PDO::PARAM_STR);
     $checkUser -> execute();
     // Fetch the result as an associative array.
