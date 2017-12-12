@@ -48,18 +48,6 @@ If not, a welcome message will show.  -->
             <small class="form-text text-muted">Please provide your password.</small>
         </div><!-- /form-group -->
 
-        <div class="form-group">
-            <label for="bio">Biography</label>
-            <input class="form-control" type="text" name="bio">
-            <small class="form-text text-muted">Please tell us something about who you are.</small>
-        </div><!-- /form-group -->
-
-        <div class="form-group">
-            <label for="avatar">Choose an image to upload</label>
-            <input class="form-control" type="file" name="avatar" accept = ".png, .jpg, .jpeg">
-            <button type="submit" class="btn btn-primary">Upload</button>
-        </div><!-- /form-group -->
-
         <button type="submit" class="btn btn-primary">Sign up</button>
     </form>
 
