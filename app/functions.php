@@ -16,3 +16,14 @@ if (!function_exists('redirect')) {
         exit;
     }
 }
+//function to show database info on profile page
+function userInfo($pdo){
+    $user_id = (int)$_SESSION['user']['user_id'];
+$query = "SELECT * FROM users WHERE user_id = :user_id";
+$statement = $pdo->prepare($query);
+$statement ->bindParam(':user_id', $user_id,PDO::PARAM_INT);
+$statement->execute();
+
+$resultQuery = $statement->fetchAll(PDO::FETCH_ASSOC);
+return $resultQuery;
+}
