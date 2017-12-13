@@ -14,9 +14,9 @@ if (isset($_FILES['avatar'])) {
     if($avatar['size'] > 2000000) {
         $error[] = 'The file is larger than 2 megabyte.';
     }
-    // If there are any errors in the array, upload the file. DB ska vi uploada el till db?
+    // If there are no errors in the array, upload the file to avatar dir and the file name to the database.
     if (count($errors) === 0) {
-        $destination = __DIR__.'/../../avatars/'.$avatar['name'];//DB vilken är den korrekta sökvägen?
+        $destination = __DIR__.'/../../avatars/'.$avatar['name'];
         //upload file from the temporary path to a new destination.
         move_uploaded_file($avatar['tmp_name'], $destination);
     }
@@ -44,6 +44,6 @@ if (!$statement) {
     die(var_dump($pdo->errorInfo()));
 }
 
-$statement->bindParam(':bio', $bio, PDO::PARAM_STR);
+$statement->bindParam(':bio', $bio[''], PDO::PARAM_STR);
     $statement->execute();
 }

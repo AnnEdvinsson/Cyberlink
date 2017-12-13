@@ -9,6 +9,7 @@ require __DIR__.'/../autoload.php';
 
 $errors = [];
 
+
 if (isset($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['userName'], $_POST['password'])) {
     //check if input chacters are valid
     $firstName = trim(filter_var($_POST['firstName'], FILTER_SANITIZE_SPECIAL_CHARS));
@@ -31,13 +32,14 @@ if (isset($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['user
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
     $statement->execute();
 
-    $email = $statement ->fetchAll(PDO::FETCH_ASSOC);
-    if ($query === $email) {
+    $user = $statement ->fetch(PDO::FETCH_ASSOC);
+    if ($user) {
         //take the user back to the login page
-        redirect("../../login.php");
+        $_SESSION['message']= 'Email allready exist. Please try to log in.';
+          redirect("../../login.php");
     }
 
-    $query = 'INSERT INTO users(email, password, firstName, lastName, userName) VALUES (:email, :password, :firstName, :lastName, :userName )';
+    $query = 'INSERT INTO users (email, password, firstName, lastName, userName) VALUES (:email, :password, :firstName, :lastName, :userName )';
 
     $statement = $pdo->prepare($query);
 
@@ -45,15 +47,15 @@ if (isset($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['user
         die(var_dump($pdo->errorInfo()));
     }
     //Bind the parameter/argument to the variable.
+    $statement->bindParam(':email', $email, PDO::PARAM_STR);
+    $statement->bindParam(':password', $hashed_pwd, PDO::PARAM_STR);
     $statement->bindParam(':firstName', $firstName, PDO::PARAM_STR);
     $statement->bindParam(':lastName', $lastName, PDO::PARAM_STR);
-    $statement->bindParam(':email', $email, PDO::PARAM_STR);
     $statement->bindParam(':userName', $userName, PDO::PARAM_STR);
-    $statement->bindParam(':password', $hashed_pwd, PDO::PARAM_STR);
-    // $statement->bindParam(':bio', $bio, PDO::PARAM_STR);
-    // $statement->bindParam(':avatar', $avatar['name'], PDO::PARAM_STR);
+
     // When the SQL statement is prepared and all parameters are bound, the query with the execute function runs.
     $statement->execute();
-
+    // die(var_dump());
     }
+
     redirect('../../login.php');

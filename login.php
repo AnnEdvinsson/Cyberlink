@@ -5,6 +5,7 @@
 
     <form action="app/auth/alogin.php" method="post">
         <div class="form-group">
+            <!-- se extra uppgift project structure om meddelande för att användaren redan finns-->
             <label for="email">Email</label>
             <input class="form-control" type="email" name="email" placeholder="email" required>
             <small class="form-text text-muted">Please provide your email address.</small>
