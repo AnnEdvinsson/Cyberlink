@@ -5,14 +5,18 @@
     <p>Welcome, <?php echo $_SESSION['user']['firstName']; ?>!</p>
     <p>This is your profile page.</p>
 
+<div>
+
     <?php if (isset($_SESSION['user'])): ?>
         <img class="avatar" src=" <?php if(isset($_SESSION['user']['avatar'])): ?>
               <?php echo $_SESSION['user']['avatar']; ?>
           <?php else: echo "/images/kurt_russel.jpg"; ?>
           <?php endif; ?>" alt="">
     <?php endif;
-// var_dump($_SESSION['user']);
-    ?>
+// var_dump($_SESSION['user']);?>
+</div>
+
+
 
 <!-- Looping user info with function userInfo to show on profile page -->
 <?php $infos = userInfo($pdo) ?>
